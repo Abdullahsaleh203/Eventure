@@ -156,9 +156,7 @@ class EventSerializer(serializers.ModelSerializer):
             instance.schedule.repeat = schedule_data.get('repeat', instance.schedule.repeat)
             instance.schedule.save()
         return instance
-    
-    # def delete(self, instance, validated_data):
-    #     return {"message": "deleted"}
+
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
