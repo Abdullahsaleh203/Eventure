@@ -1,16 +1,16 @@
 document.getElementById('signup-form').addEventListener('submit', async function (event) {
   event.preventDefault();  // Prevent the default form submission
 
-  const firstName = document.getElementById('first-name').value;
-  const lastName = document.getElementById('last-name').value;
+  const username= document.getElementById('username').value;
+  const password2 = document.getElementById('password2').value;
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
   const data = {
-    first_name: firstName,
-    last_name: lastName,
+    username: username,
     email: email,
     password: password,
+    password2: password2
   };
 
   // Print the entered data to the console
