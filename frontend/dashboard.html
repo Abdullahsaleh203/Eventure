@@ -1,101 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Stay organized with our user-friendly Calendar featuring events, reminders, and a customizable interface. Built with HTML, CSS, and JavaScript. Start scheduling today!"
-    />
-    <meta
-      name="keywords"
-      content="calendar, events, reminders, javascript, html, css, open source coding"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+    <meta name="description" content="Stay organized with our user-friendly Calendar featuring events, reminders, and a customizable interface. Built with HTML, CSS, and JavaScript. Start scheduling today!" />
+    <meta name="keywords" content="calendar, events, reminders, javascript, html, css, open source coding" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
+
     <title>Calendar with Events</title>
-  </head>
-  <body>
-     <ul class="nav-links">
-    <li><a href="#">Dashboard</a></li>
-    <li class="forward"><a href="#">Locations</a></li>
-    <li class="forward"><a href="#">Weather</a></li>
-    <li class="forward"><a href="#">Profile</a></li>
-  </ul>
-    <div class="container">
-      <div class="left">
-        <div class="calendar">
-          <div class="month">
-            <i class="fas fa-angle-left prev"></i>
-            <div class="date"></div>
-            <i class="fas fa-angle-right next"></i>
-          </div>
-          <div class="weekdays">
-            <div>Sun</div>
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-          </div>
-          <div class="days"></div>
-          <div class="goto-today">
-            <div class="goto">
-              <input type="text" placeholder="mm/yyyy" class="date-input" />
-              <button class="goto-btn">Go</button>
+</head>
+<body>
+    <ul class="nav-links">
+        <li><a href="#" class="nav-link" data-target="calendar-section" onclick="showSection('calendar-section')">Dashboard</a></li>
+        <li><a href="#" class="nav-link" data-target="map-section" onclick="showSection('map-section')">Locations</a></li>
+        <li><a href="#" class="nav-link" data-target="weather-section">Weather</a></li>
+        <li><a href="#" class="nav-link" data-target="profile-section">Profile</a></li>
+    </ul>
+
+    <div id="calendar-section" class="section">
+        <div class="container">
+            <div class="left">
+                <div class="calendar">
+                    <div class="month">
+                        <i class="fas fa-angle-left prev"></i>
+                        <div class="date"></div>
+                        <i class="fas fa-angle-right next"></i>
+                    </div>
+                    <div class="weekdays">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="days"></div>
+                    <div class="goto-today">
+                        <div class="goto">
+                            <input type="text" placeholder="mm/yyyy" class="date-input" />
+                            <button class="goto-btn">Go</button>
+                        </div>
+                        <button class="today-btn">Today</button>
+                    </div>
+                </div>
             </div>
-            <button class="today-btn">Today</button>
-          </div>
+            <div class="right">
+                <div class="today-date">
+                    <div class="event-day">Wed</div>
+                    <div class="event-date">12th December 2022</div>
+                </div>
+                <div class="events"></div>
+                <div class="add-event-wrapper">
+                    <div class="add-event-header">
+                        <div class="title">Add Event</div>
+                        <i class="fas fa-times close"></i>
+                    </div>
+                    <div class="add-event-body">
+                        <div class="add-event-input">
+                            <input type="text" placeholder="Event Name" class="event-name" />
+                        </div>
+                        <div class="add-event-input">
+                            <input type="text" placeholder="Event Time From" class="event-time-from" />
+                        </div>
+                        <div class="add-event-input">
+                            <input type="text" placeholder="Event Time To" class="event-time-to" />
+                        </div>
+                    </div>
+                    <div class="add-event-footer">
+                        <button class="add-event-btn">Add Event</button>
+                    </div>
+                </div>
+            </div>
+            <button class="add-event">
+                <i class="fas fa-plus"></i>
+            </button>
         </div>
-      </div>
-      <div class="right">
-        <div class="today-date">
-          <div class="event-day">wed</div>
-          <div class="event-date">12th december 2022</div>
-        </div>
-        <div class="events"></div>
-        <div class="add-event-wrapper">
-          <div class="add-event-header">
-            <div class="title">Add Event</div>
-            <i class="fas fa-times close"></i>
-          </div>
-          <div class="add-event-body">
-            <div class="add-event-input">
-              <input type="text" placeholder="Event Name" class="event-name" />
-            </div>
-            <div class="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Time From"
-                class="event-time-from"
-              />
-            </div>
-            <div class="add-event-input">
-              <input
-                type="text"
-                placeholder="Event Time To"
-                class="event-time-to"
-              />
-            </div>
-          </div>
-          <div class="add-event-footer">
-            <button class="add-event-btn">Add Event</button>
-          </div>
-        </div>
-      </div>
-      <button class="add-event">
-        <i class="fas fa-plus"></i>
-      </button>
     </div>
 
+    <div id="map-section" class="section">
+    <div class="container">
+        <!-- Map container -->
+        <div id="map"></div>
+
+        <!-- Forms container -->
+        <div class="form-container">
+            <h1>Events Locations</h1>
+            <h3>Google Maps Interaction</h3>
+
+            <!-- Form for getting location -->
+            <h2>Get Location</h2>
+            <form id="location-form">
+                <input type="text" id="address" placeholder="Enter address">
+                <button type="submit">Get Location</button>
+            </form>
+
+            <!-- Form for getting directions -->
+            <h2>Get Directions</h2>
+            <form id="directions-form">
+                <input type="text" id="origin" placeholder="Enter origin">
+                <input type="text" id="destination" placeholder="Enter destination">
+                <button type="submit">Get Directions</button>
+            </form>
+
+            <!-- Button to get current location -->
+            <h2>Get Current Location</h2>
+            <button id="current-location-button">Find My Location</button>
+        </div>
+    </div>
+</div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47oj2tI6UtG7ZVuM498c2iZNGMBcKW4E"></script>
+    <script>
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'flex';
+        }
+
+        var map;
+        var marker;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 40.7128, lng: -74.0060 }, // Default to New York
+                zoom: 12
+            });
+        }
+
+        window.onload = function() {
+            initMap();
+            showSection('calendar-section');
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-target');
+                    showSection(target);
+                });
+            });
+
+            document.getElementById('current-location-button').onclick = function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var lat = position.coords.latitude;
+                        var lng = position.coords.longitude;
+                        addMarker(lat, lng);
+                        map.setCenter({ lat: lat, lng: lng });
+                    }, function() {
+                        alert("Error: The Geolocation service failed.");
+                    });
+                } else {
+                    alert("Error: Your browser doesn't support geolocation.");
+                }
+            };
+
+            document.getElementById('location-form').onsubmit = function(e) {
+                e.preventDefault();
+                var address = document.getElementById('address').value;
+
+                fetch(`/get-location/?address=${address}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'OK') {
+                            var location = data.results[0].geometry.location;
+                            addMarker(location.lat, location.lng);
+                        } else {
+                            alert("Failed to get location: " + data.status);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            };
+
+            document.getElementById('directions-form').onsubmit = function(e) {
+                e.preventDefault();
+                var origin = document.getElementById('origin').value;
+                var destination = document.getElementById('destination').value;
+
+                fetch(`/get-directions/?origin=${origin}&destination=${destination}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'OK') {
+                            drawDirections({
+                                origin: origin,
+                                destination: destination
+                            });
+                        } else {
+                            alert("Failed to get directions: " + data.status);
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            };
+        };
+
+        function addMarker(lat, lng) {
+            var location = { lat: lat, lng: lng };
+            if (marker) {
+                marker.setPosition(location);
+            } else {
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            }
+            map.setCenter(location);
+        }
+
+        function drawDirections(directions) {
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var directionsService = new google.maps.DirectionsService();
+            directionsDisplay.setMap(map);
+
+            var request = {
+                origin: directions.origin,
+                destination: directions.destination,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(request, function(result, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                } else {
+                    alert("Failed to get directions: " + status);
+                }
+            });
+        }
+    </script>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
