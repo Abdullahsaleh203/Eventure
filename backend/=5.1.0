@@ -1,5 +1,0 @@
-Requirement already satisfied: Django in /home/maryam/.local/lib/python3.8/site-packages (4.2.16)
-Requirement already satisfied: asgiref<4,>=3.6.0 in /home/maryam/.local/lib/python3.8/site-packages (from Django) (3.8.1)
-Requirement already satisfied: backports.zoneinfo; python_version < "3.9" in /home/maryam/.local/lib/python3.8/site-packages (from Django) (0.2.1)
-Requirement already satisfied: sqlparse>=0.3.1 in /home/maryam/.local/lib/python3.8/site-packages (from Django) (0.5.1)
-Requirement already satisfied: typing-extensions>=4; python_version < "3.11" in /home/maryam/.local/lib/python3.8/site-packages (from asgiref<4,>=3.6.0->Django) (4.12.2)
