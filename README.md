@@ -1,5 +1,7 @@
 # Eventure
-
+## we are solving the issue for outdoor events and meetings to get the location and weather for your appointment throgh the day.
+-- only you need to create new account for first time then enjoy the features
+-- you can record your schedaul then check the weather there and the route to your place
 ## Back-End Endpoints
 
 
