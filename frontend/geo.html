@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps Interaction</title>
+    <link rel="stylesheet" href="geo.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47oj2tI6UtG7ZVuM498c2iZNGMBcKW4E"></script>
+
+</head>
+<body>
+ <div class="container">
+        <!-- Map container -->
+        <div id="map"></div>
+
+        <!-- Forms container -->
+        <div class="form-container">
+            <h1>Events Locations</h1>
+            <h1>Google Maps Interaction</h1>
+
+            <!-- Form for getting location -->
+            <h2>Get Location</h2>
+            <form id="location-form">
+                <input type="text" id="address" placeholder="Enter address">
+                <button type="submit">Get Location</button>
+            </form>
+
+            <!-- Form for getting directions -->
+            <h2>Get Directions</h2>
+            <form id="directions-form">
+                <input type="text" id="origin" placeholder="Enter origin">
+                <input type="text" id="destination" placeholder="Enter destination">
+                <button type="submit">Get Directions</button>
+            </form>
+
+            <!-- Button to get current location -->
+            <h2>Get Current Location</h2>
+            <button id="current-location-button">Find My Location</button>
+        </div>
+    </div>
+    <script>
+        // Initialize Google Map
+        var map;
+        var marker;
+        
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 40.7128, lng: -74.0060 }, // Default to New York
+                zoom: 12
+            });
+        }
+
+        // Call initMap when the page loads
+        window.onload = initMap;
+
+        // Function to add a marker to the map
+        function addMarker(lat, lng) {
+            var location = { lat: lat, lng: lng };
+            if (marker) {
+                marker.setPosition(location);
+            } else {
+                marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            }
+            map.setCenter(location);
+        }
+
+        // Function to draw directions on the map
+        function drawDirections(directions) {
+            var directionsDisplay = new google.maps.DirectionsRenderer();
+            var directionsService = new google.maps.DirectionsService();
+            directionsDisplay.setMap(map);
+
+            var request = {
+                origin: directions.origin,
+                destination: directions.destination,
+                travelMode: google.maps.TravelMode.DRIVING
+            };
+
+            directionsService.route(request, function (result, status) {
+                if (status === google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(result);
+                } else {
+                    alert("Failed to get directions: " + status);
+                }
+            });
+        }
+
+        // Function to get the user's current location
+        function getCurrentLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var lat = position.coords.latitude;
+                    var lng = position.coords.longitude;
+                    addMarker(lat, lng);
+                    map.setCenter({ lat: lat, lng: lng });
+                }, function() {
+                    alert("Error: The Geolocation service failed.");
+                });
+            } else {
+                alert("Error: Your browser doesn't support geolocation.");
+            }
+        }
+
+        // Event listener for the "Find My Location" button
+        document.getElementById('current-location-button').onclick = function () {
+            getCurrentLocation();
+        };
+
+        // AJAX request to backend for geolocation
+        document.getElementById('location-form').onsubmit = function (e) {
+            e.preventDefault();
+            var address = document.getElementById('address').value;
+
+            fetch(`/get-location/?address=${address}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        var location = data.results[0].geometry.location;
+                        addMarker(location.lat, location.lng);
+                    } else {
+                        alert("Failed to get location: " + data.status);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        };
+
+        // AJAX request to backend for directions
+        document.getElementById('directions-form').onsubmit = function (e) {
+            e.preventDefault();
+            var origin = document.getElementById('origin').value;
+            var destination = document.getElementById('destination').value;
+
+            fetch(`/get-directions/?origin=${origin}&destination=${destination}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        drawDirections({
+                            origin: origin,
+                            destination: destination
+                        });
+                    } else {
+                        alert("Failed to get directions: " + data.status);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        };
+    </script>
+</body>
+</html>

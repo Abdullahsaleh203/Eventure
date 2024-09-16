@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Login & Signup Form HTML CSS | CodingNepal</title>
+    <link rel="stylesheet" href="style_signup_login.css" />
+    
+  </head>
+  <body>
+    <section class="wrapper">
+      <div class="form signup">
+  <header>Signup</header>
+  <form id="signup-form">
+    <input type="text" id="username" placeholder="User Name" required />
+    <input type="text" id="email" placeholder="Email address" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <input type="password" id="password2" placeholder="Password-2" required />
+    <div class="checkbox"></div>
+    <input type="submit" value="Signup" />
+  </form>
+</div>
+
+<div id="response-message"></div>
+
+
+      <div class="form login">
+        <header>Login</header>
+        <form action="#">
+          <input type="text" placeholder="Email address" required />
+          <input type="password" placeholder="Password" required />
+          <input type="submit" value="Login" />
+        </form>
+      </div>
+
+      <script>
+        const wrapper = document.querySelector(".wrapper"),
+          signupHeader = document.querySelector(".signup header"),
+          loginHeader = document.querySelector(".login header");
+
+        loginHeader.addEventListener("click", () => {
+          wrapper.classList.add("active");
+        });
+        signupHeader.addEventListener("click", () => {
+          wrapper.classList.remove("active");
+        });
+      </script>
+    </section>
+    <script type="text/javascript" src="signup.js"></script>
+  </body>
+</html>
