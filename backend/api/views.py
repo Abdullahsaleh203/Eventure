@@ -2,6 +2,8 @@
 """
 The leader who manages URL's and Models
 """
+from django.http import JsonResponse
+from .services.maps import MapsService  # Assuming MapsService handles Google Maps API requests
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, action
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -283,3 +285,25 @@ def confirm_password_reset(request):
         return Response(
             {"detail": "Invalid token."},
             status=status.HTTP_400_BAD_REQUEST)
+
+# Get geolocation for an address
+@api_view(['GET'])
+def get_location(request):
+    address = request.GET.get('address')
+    if not address:
+        return JsonResponse({'error': 'Address not provided'}, status=400)
+    
+    location_data = MapsService.get_location(address)
+    return JsonResponse(location_data)
+
+# Get directions between origin and destination
+@api_view(['GET'])
+def get_directions(request):
+    origin = request.GET.get('origin')
+    destination = request.GET.get('destination')
+    
+    if not origin or not destination:
+        return JsonResponse({'error': 'Origin or destination not provided'}, status=400)
+    
+    directions_data = MapsService.get_directions(origin, destination)
+    return JsonResponse(directions_data)

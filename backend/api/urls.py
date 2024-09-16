@@ -23,6 +23,10 @@ urlpatterns = [
     path('change-password/', ChangePasswordView.as_view(), name='change_password'),
     path('request-password-reset/', request_password_reset, name='request_password_reset'),
     path('confirm-password-reset/', confirm_password_reset, name='confirm_password_reset'),
+
+    
+    path('get-location/', views.get_location, name='get_location'),  # New path for getting location
+    path('get-directions/', views.get_directions, name='get_directions'),  # New path for getting directions
 ]
 
 
