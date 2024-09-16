@@ -15,11 +15,11 @@ class MapsService:
     def get_location(address):
         """
         A method that return the location with JSON format
-        
+
         Args:
-            addres (str): the argument that 
+            addres (str): the argument that
                     want to get full location info.
-        
+
         Returns:
             json object
         """
@@ -34,11 +34,11 @@ class MapsService:
         """
         A method that return directions
         between two places with JSON format
-        
+
         Args:
             origin (str): the current location.
             destination (str): the destination location.
-        
+
         Returns:
             json object
         """

@@ -9,7 +9,7 @@ class User(AbstractUser):
     """
     username = models.CharField(max_length=100, default='null')
     email = models.EmailField(unique=True)
-    # Override the default logging to be by email field 
+    # Override the default logging to be by email field
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -24,6 +24,7 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.full_name
+
 
 class Schedule(models.Model):
     allDay = models.BooleanField(default=False)
@@ -47,7 +48,7 @@ class Event(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     event_type = models.CharField(max_length=2, choices=TYPE_CHOICES)
-    status = models.CharField(max_length=2 ,choices=STATUS_CHOICES)
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES)
     schedule = models.OneToOneField(Schedule, on_delete=models.CASCADE)
     location = models.JSONField(null=True, blank=True)
     reminders = models.TextField(null=True, blank=True)
@@ -58,13 +59,14 @@ class Event(models.Model):
         return self.title
 
 
-
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
 
+
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
 
 post_save.connect(create_user_profile, sender=User)
 post_save.connect(save_user_profile, sender=User)

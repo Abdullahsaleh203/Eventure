@@ -10,6 +10,6 @@ class CustomUserAuthentication(BaseAuthentication):
             user = request.user
             if not user.is_authenticated:
                 raise AuthenticationFailed('User is not authenticated')
-        except:
+        except e:
             raise AuthenticationFailed('User is not authenticated')
         return (user, None)
